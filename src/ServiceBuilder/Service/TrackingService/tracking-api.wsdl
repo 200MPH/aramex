@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:i0="http://ws.aramex.net/ShippingAPI/v1" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="http://ws.aramex.net/ShippingAPI/v1/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.aramex.net/ShippingAPI/v1/" name="Service_1_0">
+  <wsdl:binding type="i0:Service_1_0" name="BasicHttpBinding_Service_1_0">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="TrackShipments">
+      <soap:operation style="document" soapAction="http://ws.aramex.net/ShippingAPI/v1/Service_1_0/TrackShipments"/>
+      <wsdl:input name="ShipmentTrackingRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ShipmentTrackingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ws.aramex.net/ShippingAPI/v1/" elementFormDefault="qualified">
+      <xsd:element name="ShipmentTrackingRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element type="tns:ClientInfo" name="ClientInfo" nillable="true" minOccurs="0"/>
+            <xsd:element type="tns:Transaction" name="Transaction" nillable="true" minOccurs="0"/>
+            <xsd:element type="q1:ArrayOfstring" name="Shipments" nillable="true" minOccurs="0" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xsd:element type="xsd:boolean" name="GetLastTrackingUpdateOnly" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ClientInfo">
+        <xsd:sequence>
+          <xsd:element type="xsd:string" name="UserName" nillable="true"/>
+          <xsd:element type="xsd:string" name="Password" nillable="true"/>
+          <xsd:element type="xsd:string" name="Version" nillable="true"/>
+          <xsd:element type="xsd:string" name="AccountNumber" nillable="true"/>
+          <xsd:element type="xsd:string" name="AccountPin" nillable="true"/>
+          <xsd:element type="xsd:string" name="AccountEntity" nillable="true"/>
+          <xsd:element type="xsd:string" name="AccountCountryCode" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:ClientInfo" name="ClientInfo" nillable="true"/>
+      <xsd:complexType name="Transaction">
+        <xsd:sequence>
+          <xsd:element type="xsd:string" name="Reference1" nillable="true"/>
+          <xsd:element type="xsd:string" name="Reference2" nillable="true"/>
+          <xsd:element type="xsd:string" name="Reference3" nillable="true"/>
+          <xsd:element type="xsd:string" name="Reference4" nillable="true"/>
+          <xsd:element type="xsd:string" name="Reference5" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:Transaction" name="Transaction" nillable="true"/>
+      <xsd:element name="ShipmentTrackingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element type="tns:Transaction" name="Transaction" nillable="true" minOccurs="0"/>
+            <xsd:element type="tns:ArrayOfNotification" name="Notifications" nillable="true" minOccurs="0"/>
+            <xsd:element type="xsd:boolean" name="HasErrors" minOccurs="0"/>
+            <xsd:element type="q2:ArrayOfKeyValueOfstringArrayOfTrackingResultmFAkxlpY" name="TrackingResults" nillable="true" minOccurs="0" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ArrayOfNotification">
+        <xsd:sequence>
+          <xsd:element type="tns:Notification" name="Notification" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:ArrayOfNotification" name="ArrayOfNotification" nillable="true"/>
+      <xsd:complexType name="Notification">
+        <xsd:sequence>
+          <xsd:element type="xsd:string" name="Code" nillable="true"/>
+          <xsd:element type="xsd:string" name="Message" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:Notification" name="Notification" nillable="true"/>
+      <xsd:complexType name="ArrayOfTrackingResult">
+        <xsd:sequence>
+          <xsd:element type="tns:TrackingResult" name="TrackingResult" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:ArrayOfTrackingResult" name="ArrayOfTrackingResult" nillable="true"/>
+      <xsd:complexType name="TrackingResult">
+        <xsd:sequence>
+          <xsd:element type="xsd:string" name="WaybillNumber" nillable="true"/>
+          <xsd:element type="xsd:string" name="UpdateCode" nillable="true"/>
+          <xsd:element type="xsd:string" name="UpdateDescription" nillable="true"/>
+          <xsd:element type="xsd:dateTime" name="UpdateDateTime"/>
+          <xsd:element type="xsd:string" name="UpdateLocation" nillable="true"/>
+          <xsd:element type="xsd:string" name="Comments" nillable="true"/>
+          <xsd:element type="xsd:string" name="ProblemCode" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:TrackingResult" name="TrackingResult" nillable="true"/>
+    </xsd:schema>
+    <xsd:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified">
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:sequence>
+          <xsd:element type="xsd:string" name="string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:ArrayOfstring" name="ArrayOfstring" nillable="true"/>
+      <xsd:complexType name="ArrayOfKeyValueOfstringArrayOfTrackingResultmFAkxlpY">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="KeyValueOfstringArrayOfTrackingResultmFAkxlpY" minOccurs="0" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element type="xsd:string" name="Key" nillable="true"/>
+                <xsd:element type="q3:ArrayOfTrackingResult" name="Value" nillable="true" xmlns:q3="http://ws.aramex.net/ShippingAPI/v1/"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element type="tns:ArrayOfKeyValueOfstringArrayOfTrackingResultmFAkxlpY" name="ArrayOfKeyValueOfstringArrayOfTrackingResultmFAkxlpY" nillable="true"/>
+    </xsd:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified">
+      <xs:element type="xs:anyType" name="anyType" nillable="true"/>
+      <xs:element type="xs:anyURI" name="anyURI" nillable="true"/>
+      <xs:element type="xs:base64Binary" name="base64Binary" nillable="true"/>
+      <xs:element type="xs:boolean" name="boolean" nillable="true"/>
+      <xs:element type="xs:byte" name="byte" nillable="true"/>
+      <xs:element type="xs:dateTime" name="dateTime" nillable="true"/>
+      <xs:element type="xs:decimal" name="decimal" nillable="true"/>
+      <xs:element type="xs:double" name="double" nillable="true"/>
+      <xs:element type="xs:float" name="float" nillable="true"/>
+      <xs:element type="xs:int" name="int" nillable="true"/>
+      <xs:element type="xs:long" name="long" nillable="true"/>
+      <xs:element type="xs:QName" name="QName" nillable="true"/>
+      <xs:element type="xs:short" name="short" nillable="true"/>
+      <xs:element type="xs:string" name="string" nillable="true"/>
+      <xs:element type="xs:unsignedByte" name="unsignedByte" nillable="true"/>
+      <xs:element type="xs:unsignedInt" name="unsignedInt" nillable="true"/>
+      <xs:element type="xs:unsignedLong" name="unsignedLong" nillable="true"/>
+      <xs:element type="xs:unsignedShort" name="unsignedShort" nillable="true"/>
+      <xs:element type="tns:char" name="char" nillable="true"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element type="tns:duration" name="duration" nillable="true"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element type="tns:guid" name="guid" nillable="true"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute type="xs:QName" name="FactoryType"/>
+      <xs:attribute type="xs:ID" name="Id"/>
+      <xs:attribute type="xs:IDREF" name="Ref"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ShipmentTrackingRequest">
+    <wsdl:part name="parameters" element="tns:ShipmentTrackingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ShipmentTrackingResponse">
+    <wsdl:part name="parameters" element="tns:ShipmentTrackingResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="Service_1_0">
+    <wsdl:operation name="TrackShipments">
+      <wsdl:input name="ShipmentTrackingRequest" message="tns:ShipmentTrackingRequest" wsaw:Action="http://ws.aramex.net/ShippingAPI/v1/Service_1_0/TrackShipments"/>
+      <wsdl:output name="ShipmentTrackingResponse" message="tns:ShipmentTrackingResponse" wsaw:Action="http://ws.aramex.net/ShippingAPI/v1/Service_1_0/TrackShipmentsResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="Service_1_0">
+    <wsdl:port name="BasicHttpBinding_Service_1_0" binding="i0:BasicHttpBinding_Service_1_0">
+      <soap:address location="http://ws.aramex.net/shippingapi/tracking/service_1_0.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
