@@ -53,9 +53,20 @@ class TrackingService extends AbstractService {
     public function getResponse()
     {
         
-            $response = new TrackingResponse( $this->response );
+        if(is_object($this->response) === false) {
+            
+            $this->response = new \stdClass();
+                    
+            $this->response->Transaction = null;
+            $this->response->Notifications = null;
+            $this->response->HasErrors = 0;
+            $this->response->TrackingResults = null;
+            
+        }
+        
+        $response = new TrackingResponse( $this->response );
 
-            return $response;
+        return $response;
         
     }
         

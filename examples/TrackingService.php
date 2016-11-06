@@ -9,7 +9,11 @@
 
 use thm\Aramex\AramexClient;
 use thm\Aramex\ServiceBuilder\Service\TrackingService\TrackingService;
+use thm\Aramex\Transaction;
 use thm\Aramex\AramexException;
+
+/* If Composer autoloader is used, ignore it, otherwise load required classes */
+//require_once '../vendor/autoload.php';
 
 /* Very simple */
 try {
@@ -27,8 +31,14 @@ try {
        ->sendRequest();
 
     // return tracking collection
-    var_dump($ts->getResponse()->getTracks());
-    
+    $tracks = $ts->getResponse()->getTracks();
+    var_dump($tracks);
+    foreach($tracks as $track) {
+        
+        var_dump($track->getWaybillNumber());
+        
+    }
+        
     // get whole object
     var_dump($ts->getResponse());
     
@@ -62,7 +72,8 @@ try {
 
     $ts = new TrackingService($client);
     $ts->setTransaction($transaction)
-       ->setShipments( array($this->order->getCarrierShipRef()) );
+       ->setShipments( array('Ship111111111') )
+       ->sendRequest();
 
     // return tracking collection
     var_dump($ts->getResponse()->getTracks());
